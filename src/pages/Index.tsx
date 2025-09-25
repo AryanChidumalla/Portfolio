@@ -7,7 +7,13 @@ const Index = () => {
   return (
     <main className="min-h-screen">
       <Hero />
-      <Projects />
+      {/* <Projects /> */}
+      <Projects
+        title="Recent Projects"
+        description="Here are a few things I’ve been working on recently."
+        limit={3}
+        showViewAllButton={true}
+      />
       <About />
       <Contact />
     </main>
