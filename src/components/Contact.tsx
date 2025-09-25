@@ -45,7 +45,7 @@ const socialLinks = [
   {
     icon: Linkedin,
     label: "LinkedIn",
-    href: "https://linkedin.com/AryanChidumalla",
+    href: "https://www.linkedin.com/in/AryanChidumalla/",
     username: "AryanChidumalla",
   },
   // {
