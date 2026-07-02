@@ -5,18 +5,29 @@ import { profile, footerLinks } from "../data/portfolioData";
 export default function Footer() {
   const [submitted, setSubmitted] = useState(false);
 
-  // Netlify form submission handler for JavaScript apps
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
     const form = e.target;
 
-    fetch("/", {
-      method: "POST",
-      headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: new URLSearchParams(new FormData(form)).toString(),
-    })
-      .then(() => setSubmitted(true))
-      .catch((error) => console.error("Form submission error:", error));
+    try {
+      const response = await fetch("/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: new URLSearchParams(new FormData(form)).toString(),
+      });
+
+      if (response.ok) {
+        setSubmitted(true);
+        form.reset();
+      } else {
+        console.error("Form submission failed.");
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+    }
   };
 
   return (
@@ -26,13 +37,13 @@ export default function Footer() {
         <h2 className="text-2xl font-semibold font-display sm:text-3xl">
           Let's build something.
         </h2>
+
         <p className="max-w-md mx-auto mt-2 mb-8 text-sm text-mute">
           Open to full-time roles across web engineering, applied ML, and
           backend/DSA-heavy teams.
         </p>
 
         {submitted ? (
-          /* SUCCESS STATE */
           <div className="flex flex-col items-center justify-center max-w-md p-6 mx-auto border bg-emerald-500/10 border-emerald-500/20 rounded-xl text-emerald-400">
             <CheckCircle className="mb-2" size={32} />
             <h3 className="text-base font-semibold">Message transmitted!</h3>
@@ -42,16 +53,24 @@ export default function Footer() {
             </p>
           </div>
         ) : (
-          /* INTERACTIVE NETLIFY FORM */
           <form
             name="portfolio-contact"
             method="POST"
             data-netlify="true"
+            data-netlify-honeypot="bot-field"
             onSubmit={handleSubmit}
             className="grid max-w-xl gap-4 mx-auto font-mono text-xs text-left"
           >
-            {/* CRITICAL FOR REACT + NETLIFY WORKFLOWS */}
+            {/* Required by Netlify */}
             <input type="hidden" name="form-name" value="portfolio-contact" />
+
+            {/* Honeypot spam protection */}
+            <p hidden>
+              <label>
+                Don't fill this out if you're human:
+                <input name="bot-field" />
+              </label>
+            </p>
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="flex flex-col gap-1.5">
@@ -61,15 +80,17 @@ export default function Footer() {
                 >
                   Your Name
                 </label>
+
                 <input
-                  type="text"
-                  name="name"
                   id="name"
+                  name="name"
+                  type="text"
                   required
                   placeholder="Steve Rogers"
                   className="w-full px-4 py-3 text-sm transition-colors border bg-zinc-950/50 border-white/10 rounded-xl text-ink focus:outline-none focus:border-purple-500/50 placeholder:text-zinc-600"
                 />
               </div>
+
               <div className="flex flex-col gap-1.5">
                 <label
                   htmlFor="email"
@@ -77,10 +98,11 @@ export default function Footer() {
                 >
                   Email Address
                 </label>
+
                 <input
-                  type="email"
-                  name="email"
                   id="email"
+                  name="email"
+                  type="email"
                   required
                   placeholder="steve@shield.org"
                   className="w-full px-4 py-3 text-sm transition-colors border bg-zinc-950/50 border-white/10 rounded-xl text-ink focus:outline-none focus:border-purple-500/50 placeholder:text-zinc-600"
@@ -95,11 +117,12 @@ export default function Footer() {
               >
                 Message
               </label>
+
               <textarea
-                name="message"
                 id="message"
-                required
+                name="message"
                 rows={4}
+                required
                 placeholder="Looking for a developer with your blend of web and data background..."
                 className="w-full px-4 py-3 text-sm transition-colors border resize-none bg-zinc-950/50 border-white/10 rounded-xl text-ink focus:outline-none focus:border-purple-500/50 placeholder:text-zinc-600"
               />
@@ -123,6 +146,7 @@ export default function Footer() {
             <p className="font-mono text-[11px] text-mute mb-3 tracking-wide uppercase">
               {group}
             </p>
+
             <ul className="space-y-2">
               {links.map((l) => (
                 <li key={l.label}>
@@ -139,11 +163,12 @@ export default function Footer() {
         ))}
       </div>
 
-      {/* COPYRIGHT METRIC FLOOR */}
+      {/* COPYRIGHT */}
       <div className="flex flex-col justify-between max-w-3xl gap-4 px-2 pt-6 mx-auto mt-10 text-xs border-t border-white/5 sm:flex-row text-mute">
         <p>
           © {new Date().getFullYear()} {profile.name}.
         </p>
+
         <p>No data is tracked on this site beyond anonymous page metrics.</p>
       </div>
     </footer>
