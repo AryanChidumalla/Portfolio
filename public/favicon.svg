@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Hard Offset Neo-Brutalist Shadow -->
+  <rect x="8" y="8" width="48" height="48" fill="#0A0A0C" />
+  <!-- Main Canary Yellow Tile -->
+  <rect x="4" y="4" width="48" height="48" fill="#FFE600" stroke="#0A0A0C" stroke-width="4" />
+  <!-- Monogram AC Typography -->
+  <text x="28" y="37" font-family="'Space Grotesk', 'JetBrains Mono', monospace, sans-serif" font-weight="900" font-size="22" fill="#0A0A0C" text-anchor="middle" letter-spacing="-1">AC</text>
+</svg>

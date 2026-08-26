@@ -1,24 +1,29 @@
-import { useState } from "react";
-import Sidebar from "./components/Sidebar";
+import { useTheme } from "./hooks/useTheme";
+import FloatingBackground from "./components/FloatingBackground";
+import Navbar from "./components/Navbar";
 import Hero from "./components/Hero";
-import ProjectMatrix from "./components/ProjectMatrix";
+import ProjectsSection from "./components/ProjectsSection";
+import AboutSection from "./components/AboutSection";
 import Skills from "./components/Skills";
-import EngineeringLog from "./components/EngineeringLog";
 import Footer from "./components/Footer";
 
 export default function App() {
-  const [activeFilter, setActiveFilter] = useState("all");
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   return (
-    <div className="min-h-screen">
-      <Sidebar mobileOpen={mobileOpen} setMobileOpen={setMobileOpen} />
+    <div className="min-h-screen bg-paper-bg dark:bg-darkcanvas-bg text-ink dark:text-slate-100 relative selection:bg-brutal-yellow selection:text-black transition-colors duration-200">
+      {/* Fixed Developer Floating Background Layer */}
+      <FloatingBackground />
 
-      <main className="px-5 pt-24 md:ml-80 lg:ml-96 sm:px-8 md:p-12 md:pt-12">
-        <Hero active={activeFilter} setActive={setActiveFilter} />
-        <ProjectMatrix active={activeFilter} />
+      {/* Sticky Neo-Brutalist Navigation Bar with Theme Toggle */}
+      <Navbar theme={theme} toggleTheme={toggleTheme} />
+
+      {/* Main Portfolio Sections */}
+      <main className="relative z-10">
+        <Hero />
+        <ProjectsSection />
+        <AboutSection />
         <Skills />
-        {/* <EngineeringLog /> */}
         <Footer />
       </main>
     </div>

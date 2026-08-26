@@ -1,0 +1,138 @@
+/* =================================
+   Neo-Brutalist Floating Animations
+   ================================= */
+
+@keyframes brutal-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-4deg);
+  }
+
+  25% {
+    transform: translate3d(4px, -8px, 0) rotate(0deg);
+  }
+
+  50% {
+    transform: translate3d(0, -15px, 0) rotate(4deg);
+  }
+
+  75% {
+    transform: translate3d(-4px, -8px, 0) rotate(0deg);
+  }
+}
+
+@keyframes brutal-float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-2deg);
+  }
+
+  50% {
+    transform: translate3d(8px, -12px, 0) rotate(4deg);
+  }
+}
+
+@keyframes brutal-wiggle {
+  0%,
+  100% {
+    transform: rotate(-5deg);
+  }
+
+  25% {
+    transform: rotate(2deg);
+  }
+
+  50% {
+    transform: rotate(5deg);
+  }
+
+  75% {
+    transform: rotate(-1deg);
+  }
+}
+
+@keyframes brutal-pulse {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+
+  50% {
+    transform: scale(1.1) rotate(3deg);
+  }
+}
+
+@keyframes brutal-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes brutal-spin-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+
+  to {
+    transform: rotate(0deg);
+  }
+}
+
+/* =================================
+   Animation Classes
+   ================================= */
+
+.animate-brutal-float {
+  animation-name: brutal-float;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.animate-brutal-float-slow {
+  animation-name: brutal-float-slow;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.animate-brutal-wiggle {
+  animation-name: brutal-wiggle;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.animate-brutal-pulse {
+  animation-name: brutal-pulse;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+.animate-brutal-spin {
+  animation-name: brutal-spin;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+.animate-brutal-spin-reverse {
+  animation-name: brutal-spin-reverse;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+/* =================================
+   Reduced Motion
+   ================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-brutal-float,
+  .animate-brutal-float-slow,
+  .animate-brutal-wiggle,
+  .animate-brutal-pulse,
+  .animate-brutal-spin,
+  .animate-brutal-spin-reverse {
+    animation: none;
+  }
+}
